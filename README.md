@@ -13,13 +13,17 @@
 # Table of contents
 - [Table of contents](#table-of-contents)
 - [Calibration \&  Upgrade Pixhawk](#calibration---upgrade-pixhawk)
+  - [From BlueOS:](#from-blueos)
+  - [From QGroundControl:](#from-qgroundcontrol)
+  - [From App Python Calibracion Pixhawk](#from-app-python-calibracion-pixhawk)
 - [Lectura de IMU (Picth-Roll-Yaw) / Voltaje / corriente desde Windows](#lectura-de-imu-picth-roll-yaw--voltaje--corriente-desde-windows)
+- [Uso](#uso)
 - [Lectura de Pixhawk  desde Raspberry pi 4](#lectura-de-pixhawk--desde-raspberry-pi-4)
 - [Lectura de Telemetria (file.tlog) provenientes de QGroundControl](#lectura-de-telemetria-filetlog-provenientes-de-qgroundcontrol)
 
 <br>
 
-Configuración de pixhawk Auto-Piloto. Calibration | Upgrade Pixhawk | Lectura de IMU (Picth-Roll-Yaw) / Voltaje / corriente desde Windows / RPi4 
+Configuración de pixhawk Auto-Piloto. Calibration | Upgrade Pixhawk | Lectura de IMU (Picth-Roll-Yaw) / Voltaje / corriente desde Windows / RPi4. versión actual ```Pixhawk FMU 2.4.8```
 
 <p align="center"><img src="./img/PixHawk_labelled.webp" width="600"   alt=" " /></p>
 
@@ -28,7 +32,45 @@ Configuración de pixhawk Auto-Piloto. Calibration | Upgrade Pixhawk | Lectura d
 <br>
 
 # Calibration &  Upgrade Pixhawk
+
+## From BlueOS:
+Actualizar Firmware desde BlueOS Browser localmente IP http://192.168.2.2/vehicle/autopilot
+ 
+> :memo: **Note:** Para que tome la configuración hay que reiniciarlo (Software||Alimentación)
+
+<br>
+
+## From QGroundControl:
+Actualizar Firmware | Calibrar Acelerometro | Calibrar Compass
+
+* Qgroundcontrol/Vehicle Configuraction/Power:
+	* Habilitar Battery Monitor para poder medir voltaje y Corriente 
+* Qgroundcontrol/Vehicle Configuraction/Sensors:
+	* Calibrar Accelerometers (importante)
+	* Calibrar Compass (importante)
+  
+> :memo: **Note:** Para que tome la configuración hay que reiniciarlo (Software||Alimentación)
+  
+<p align="center"><img src="./img/upgrade_pix.png" width="400"   alt=" " /></p>
+
+
+<br>
+
+## From App Python Calibracion Pixhawk
+Actualizar Firmware | Calibrar Acelerometro | Calibrar Compass
+
 <p align="center"><img src="./img/calibration_pixhamk.png" width="800"   alt=" " /></p>
+
+> :memo: **Note:** Para que tome la configuración hay que reiniciarlo (Software||Alimentación)
+
+```bash
+# Instalar dependencia
+py -3.13 -m pip install pymavlink pyserial textual
+
+# Ejecutar (auto-detecta el puerto)
+python pixhawk_calibrate.py
+```
+
 
 **pixhawk_calibrate.py**
 ```Python
@@ -1210,9 +1252,31 @@ if __name__ == "__main__":
 
 <br>
 
-<br>
+
+
+
+
+
+
 
 # Lectura de IMU (Picth-Roll-Yaw) / Voltaje / corriente desde Windows
+
+```bash
+# Instalar dependencia
+pip install pymavlink pyserial
+
+# Ejecutar (auto-detecta el puerto)
+python pixhawk_monitor_win.py   # para Windows
+python pixhawk_monitor_rpi.py   # para Raspberry
+```
+
+# Uso
+
+* Para medir voltaje y corriente se necesita una tierra en comun
+* Para medir el horizonte solo se usa el Pich y Roll
+
+
+
 **pixhawk_monitor_win.py**
 ```Python
 #!/usr/bin/env python3
@@ -1783,10 +1847,22 @@ if __name__ == "__main__":
 
 
 # Lectura de Pixhawk  desde Raspberry pi 4
+
+
+```bash
+# Instalar dependencia
+pip install pymavlink pyserial
+
+# Ejecutar (auto-detecta el puerto)
+python pixhawk_monitor_win.py   # para Windows
+python pixhawk_monitor_rpi.py   # para Raspberry
+```
+
+
+
 **pixhawk_monitor_rpi.py**
 
 ```Python
-
 #!/home/maquintel/venv/bin/python3
 """
 pixhawk_monitor_rpi.py  v1.0
