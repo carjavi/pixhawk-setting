@@ -1,4 +1,4 @@
-<p align="center"><img src="./img/Pixhawk.png" width="300"   alt=" " /></p>
+<p align="center"><img src="./img/Pixhawk.png" width="200"   alt=" " /></p>
 <h1 align="center"> Pixhawk Setting </h1> 
 <h4 align="right">Jul 26</h4>
 
@@ -1211,7 +1211,7 @@ if __name__ == "__main__":
 
 <br>
 
-<p align="center"><img src="./img/Chart.png" width="900"   alt=" " /></p>
+<p align="center"><img src="./img/chart.png" width="900"   alt=" " /></p>
 
 # Lectura de IMU (Picth-Roll-Yaw) / Voltaje / corriente desde Windows
 **pixhawk_monitor_win.py**
