@@ -24,9 +24,19 @@ Install:
 import argparse
 import glob
 import math
-import os
 import sys
 import time
+
+# ──────────────────────────────────────────────
+# Forzar salida UTF-8 (Git Bash/MinTTY no usa la consola
+# nativa de Windows y cae a cp1252, rompiendo los caracteres
+# especiales de este script)
+# ──────────────────────────────────────────────
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
 # ──────────────────────────────────────────────
 # Verificar dependencias antes de continuar
@@ -85,8 +95,14 @@ C_BLUE   = "\033[94m"
 # Helpers
 # ──────────────────────────────────────────────
 
-def clear_screen():
-    os.system("cls" if os.name == "nt" else "clear")
+def cursor_home():
+    """Mueve el cursor al origen sin borrar la pantalla (evita parpadeo/salto)."""
+    print("\033[H", end="")
+
+
+def clear_to_end():
+    """Borra desde el cursor hasta el final de la pantalla."""
+    print("\033[J", end="")
 
 
 def heading_to_cardinal(deg: float) -> str:
@@ -293,7 +309,6 @@ def print_header():
     w = 62
     print(f"{C_ORANGE}{C_BOLD}{'═' * w}{C_RESET}")
     print(f"{C_ORANGE}{C_BOLD}   Monitor Pixhawk  v2.0  (MAVLink){C_RESET}")
-    print(f"{C_GRAY}   RUT 76.196.131-4 | Robótica e Inspección Industrial{C_RESET}")
     print(f"{C_ORANGE}{C_BOLD}{'═' * w}{C_RESET}")
 
 
@@ -459,6 +474,9 @@ def run(conn: mavutil.mavfile, port: str, baud: int):
     print(f"\n{C_GREEN}   Recibiendo datos — Ctrl+C para salir{C_RESET}\n")
     time.sleep(0.3)
 
+    # Limpieza única antes de empezar a refrescar en el mismo lugar
+    print("\033[2J\033[H", end="")
+
     while True:
         msg = conn.recv_match(
             type=["ATTITUDE", "VFR_HUD", "SYS_STATUS", "BATTERY_STATUS"],
@@ -504,8 +522,9 @@ def run(conn: mavutil.mavfile, port: str, baud: int):
             last_loop  = now
             last_print = now
             loop      += 1
-            clear_screen()
+            cursor_home()
             print_data(state, port, baud, loop, fps_smooth)
+            clear_to_end()
 
 
 # ──────────────────────────────────────────────
