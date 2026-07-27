@@ -58,8 +58,10 @@ Actualizar Firmware | Calibrar Acelerometro | Calibrar Compass
 
 ## From App Python Calibracion Pixhawk
 Actualizar Firmware | Calibrar Acelerometro | Calibrar Compass
-
-<p align="center"><img src="./img/calibration_pixhamk.png" width="800"   alt=" " /></p>
+Windows
+<p align="center"><img src="./img/calibration_pixhamk.png" width="700"   alt=" " /></p>
+Rasperry Pi4
+<p align="center"><img src="./img/pix_rpi_calibration.png" width="400"   alt=" " /></p>
 
 > :memo: **Note:** Para que tome la configuración hay que reiniciarlo (Software||Alimentación). 
 > Funciona en CMD/PowerShell
@@ -1887,6 +1889,8 @@ if __name__ == "__main__":
 
 # Lectura de Pixhawk  desde Raspberry pi 4
 
+<p align="center"><img src="./img/pix_rpi.png" width="600"   alt=" " /></p>
+
 
 ```bash
 # Instalar dependencia
@@ -1896,7 +1900,6 @@ pip install pymavlink pyserial
 python pixhawk_monitor_win.py   # para Windows
 python pixhawk_monitor_rpi.py   # para Raspberry / Ubuntu
 ```
-
 
 
 **pixhawk_monitor_rpi.py**
