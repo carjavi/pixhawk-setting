@@ -60,7 +60,7 @@ Actualizar Firmware | Calibrar Acelerometro | Calibrar Compass
 Actualizar Firmware | Calibrar Acelerometro | Calibrar Compass
 Windows
 <p align="center"><img src="./img/calibration_pixhamk.png" width="700"   alt=" " /></p>
-Rasperry Pi4
+Raspberry Pi4 / Ubuntu 2x.xx
 <p align="center"><img src="./img/pix_rpi_calibration.png" width="400"   alt=" " /></p>
 
 > :memo: **Note:** Para que tome la configuración hay que reiniciarlo (Software||Alimentación). 
