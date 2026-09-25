@@ -87,7 +87,7 @@ python pixhawk_calibrate.py
 
 # Lectura de IMU (Picth-Roll-Yaw) / Voltaje - corriente / GPS desde Windows
 
-<p align="center"><img src="./img/test_pix.png" width="700"   alt=" " /></p>
+<p align="center"><img src="./img/testing_pix_win.png" width="700"   alt=" " /></p>
 
 ```bash
 # Instalar dependencia
